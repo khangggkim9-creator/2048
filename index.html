@@ -1,0 +1,335 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+
+  <meta charset="utf-8">
+
+  <title>2048 xin chào</title>
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1"
+  >
+
+  <meta
+    name="apple-mobile-web-app-capable"
+    content="yes"
+  >
+
+  <meta
+    name="apple-mobile-web-app-status-bar-style"
+    content="black"
+  >
+
+  <meta
+    name="apple-mobile-web-app-title"
+    content="2048"
+  >
+
+  <link
+    href="style/main.css"
+    rel="stylesheet"
+    type="text/css"
+  >
+
+</head>
+
+
+<body>
+
+
+  <div class="container">
+
+
+    <!-- =====================================================
+         PHẦN TIÊU ĐỀ
+    ====================================================== -->
+
+    <div class="heading">
+
+      <h1 class="title">
+        2048 xin chào
+      </h1>
+
+
+      <div class="scores-container">
+
+        <div class="score-container">
+          0
+        </div>
+
+        <div class="best-container">
+          0
+        </div>
+
+      </div>
+
+    </div>
+
+
+
+    <!-- =====================================================
+         GIỚI THIỆU GAME
+    ====================================================== -->
+
+    <div class="above-game">
+
+      <p class="game-intro">
+        Kết nối các ô số và chạm tới
+        <strong>ô 2048!</strong>
+      </p>
+
+
+      <a class="restart-button">
+        Chơi mới
+      </a>
+
+    </div>
+
+
+
+    <!-- =====================================================
+         NHẬP TÊN NGƯỜI CHƠI
+    ====================================================== -->
+
+    <div class="player-name-box">
+
+      <label for="playerName">
+        Tên người chơi:
+      </label>
+
+
+      <input
+        type="text"
+        id="playerName"
+        placeholder="Nhập tên người chơi"
+        maxlength="50"
+        autocomplete="off"
+    spellcheck="false"
+>
+
+
+      <button
+        id="savePlayerName"
+        type="button"
+      >
+        Lưu tên
+      </button>
+
+
+      <span id="playerNameStatus"></span>
+
+    </div>
+
+
+
+    <!-- =====================================================
+         GAME 2048
+    ====================================================== -->
+
+    <div class="game-container">
+
+
+      <!-- ===================================================
+           THÔNG BÁO GAME OVER / WIN
+      ==================================================== -->
+
+      <div class="game-message">
+
+        <p></p>
+
+
+        <div class="lower">
+
+          <a class="keep-playing-button">
+            Keep going
+          </a>
+
+
+          <a class="retry-button">
+            Try again
+          </a>
+
+        </div>
+
+      </div>
+
+
+
+      <!-- ===================================================
+           BẢNG 4 x 4
+      ==================================================== -->
+
+      <div class="grid-container">
+
+
+        <!-- HÀNG 1 -->
+
+        <div class="grid-row">
+
+          <div class="grid-cell"></div>
+          <div class="grid-cell"></div>
+          <div class="grid-cell"></div>
+          <div class="grid-cell"></div>
+
+        </div>
+
+
+        <!-- HÀNG 2 -->
+
+        <div class="grid-row">
+
+          <div class="grid-cell"></div>
+          <div class="grid-cell"></div>
+          <div class="grid-cell"></div>
+          <div class="grid-cell"></div>
+
+        </div>
+
+
+        <!-- HÀNG 3 -->
+
+        <div class="grid-row">
+
+          <div class="grid-cell"></div>
+          <div class="grid-cell"></div>
+          <div class="grid-cell"></div>
+          <div class="grid-cell"></div>
+
+        </div>
+
+
+        <!-- HÀNG 4 -->
+
+        <div class="grid-row">
+
+          <div class="grid-cell"></div>
+          <div class="grid-cell"></div>
+          <div class="grid-cell"></div>
+          <div class="grid-cell"></div>
+
+        </div>
+
+
+      </div>
+
+
+
+      <!-- ===================================================
+           CÁC Ô SỐ ĐƯỢC JAVASCRIPT TẠO
+      ==================================================== -->
+
+      <div class="tile-container"></div>
+
+
+    </div>
+
+
+
+    <!-- =====================================================
+         LỊCH SỬ CHƠI
+    ====================================================== -->
+
+    <div class="score-history">
+
+
+      <h2>
+        Lịch sử chơi
+      </h2>
+
+
+
+      <!-- ===================================================
+           TIÊU ĐỀ BẢNG
+      ==================================================== -->
+
+      <div class="score-history-header">
+
+        <span>
+          Người chơi
+        </span>
+
+
+        <span>
+          Điểm
+        </span>
+
+
+        <span>
+          Thời gian
+        </span>
+
+      </div>
+
+
+
+      <!-- ===================================================
+           DỮ LIỆU LẤY TỪ AZURE
+      ==================================================== -->
+
+      <div id="score-history-list">
+
+        <p>
+          Đang tải lịch sử...
+        </p>
+
+      </div>
+
+
+    </div>
+
+
+
+  </div>
+
+
+
+  <!-- =======================================================
+       JAVASCRIPT CỦA GAME
+  ======================================================== -->
+
+  <script src="js/bind_polyfill.js"></script>
+
+  <script src="js/classlist_polyfill.js"></script>
+
+  <script src="js/animframe_polyfill.js"></script>
+
+  <script src="js/keyboard_input_manager.js"></script>
+
+  <script src="js/html_actuator.js"></script>
+
+  <script src="js/grid.js"></script>
+
+  <script src="js/tile.js"></script>
+
+  <script src="js/local_storage_manager.js"></script>
+
+
+
+  <!-- =======================================================
+       API AZURE
+  ======================================================== -->
+
+  <script src="js/apl.js"></script>
+
+
+
+  <!-- =======================================================
+       QUẢN LÝ GAME
+  ======================================================== -->
+
+  <script src="js/game_manager.js"></script>
+
+
+
+  <!-- =======================================================
+       KHỞI ĐỘNG GAME
+  ======================================================== -->
+
+  <script src="js/application.js"></script>
+
+
+</body>
+
+</html>
